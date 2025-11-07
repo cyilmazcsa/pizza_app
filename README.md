@@ -40,3 +40,7 @@ Minimale Unit-Tests befinden sich in `test/app_state_test.dart` und prüfen Prei
 - Fahrer-App/Routing und Live-ETA
 
 Die notwendigen Interfaces und Platzhalter sind bereits im Code vorhanden und mit TODO-Kommentaren gekennzeichnet.
+=======
+# Pizza App
+
+This repository contains a simple pizza ordering application.
