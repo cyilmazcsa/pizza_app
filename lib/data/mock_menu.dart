@@ -1,0 +1,96 @@
+import '../domain/models.dart';
+
+final List<Topping> kDemoToppings = [
+  Topping(id: 'olives', name: 'Oliven', emoji: '🫒'),
+  Topping(id: 'mushrooms', name: 'Pilze', emoji: '🍄'),
+  Topping(id: 'peppers', name: 'Paprika', emoji: '🫑'),
+  Topping(id: 'ham', name: 'Schinken', emoji: '🥓', isMeat: true),
+  Topping(id: 'sucuk', name: 'Sucuk', emoji: '🌶️', isMeat: true),
+  Topping(id: 'corn', name: 'Mais', emoji: '🌽'),
+  Topping(id: 'onion', name: 'Zwiebeln', emoji: '🧅'),
+  Topping(id: 'jalapeno', name: 'Jalapeño', emoji: '🌶️'),
+  Topping(id: 'pineapple', name: 'Ananas', emoji: '🍍'),
+];
+
+final List<MenuItem> kMenuItems = [
+  MenuItem(
+    id: 'pizza_marg',
+    title: 'Margherita',
+    description: 'Italienischer Klassiker mit frischem Basilikum.',
+    image: 'pizza_marg',
+    basePrice: 7.9,
+    isPizza: true,
+    preset: PizzaConfig(
+      dough: DoughType.italian,
+      crust: CrustEdge.none,
+      sizeCm: 30,
+      toppingIds: const ['mushrooms'],
+    ),
+  ),
+  MenuItem(
+    id: 'pizza_funghi',
+    title: 'Funghi',
+    description: 'Saftige Champignons auf Mozzarella.',
+    image: 'pizza_funghi',
+    basePrice: 8.5,
+    isPizza: true,
+    preset: PizzaConfig(
+      dough: DoughType.italian,
+      crust: CrustEdge.none,
+      sizeCm: 30,
+      toppingIds: const ['mushrooms'],
+    ),
+  ),
+  MenuItem(
+    id: 'pizza_4cheese',
+    title: '4 Käse',
+    description: 'Vier Käsesorten, cremig und herzhaft.',
+    image: 'pizza_4cheese',
+    basePrice: 9.2,
+    isPizza: true,
+    preset: PizzaConfig(
+      dough: DoughType.italian,
+      crust: CrustEdge.cheeseCrust,
+      sizeCm: 30,
+      toppingIds: const [],
+    ),
+  ),
+  MenuItem(
+    id: 'pizza_pepperoni',
+    title: 'Pepperoni',
+    description: 'Pikante Peperoni und Mozzarella.',
+    image: 'pizza_pepperoni',
+    basePrice: 9.5,
+    isPizza: true,
+    preset: PizzaConfig(
+      dough: DoughType.american,
+      crust: CrustEdge.none,
+      sizeCm: 34,
+      toppingIds: const ['sucuk', 'peppers'],
+    ),
+  ),
+  MenuItem(
+    id: 'salad_greek',
+    title: 'Griechischer Salat',
+    description: 'Feta, Gurken, Tomaten und Oliven.',
+    image: 'salad_greek',
+    basePrice: 5.5,
+    isPizza: false,
+  ),
+  MenuItem(
+    id: 'drink_cola',
+    title: 'Coca-Cola 0.5L',
+    description: 'Gekühlt serviert.',
+    image: 'drink_cola',
+    basePrice: 2.5,
+    isPizza: false,
+  ),
+  MenuItem(
+    id: 'drink_fanta',
+    title: 'Fanta 0.5L',
+    description: 'Spritzig orange.',
+    image: 'drink_fanta',
+    basePrice: 2.5,
+    isPizza: false,
+  ),
+];
