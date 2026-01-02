@@ -353,16 +353,16 @@ class _ToppingMarker extends StatelessWidget {
   Widget build(BuildContext context) {
     final angle = (2 * pi * index) / (total == 0 ? 1 : total);
     final offset = Offset(radius * cos(angle), radius * sin(angle));
-    final url = toppingImageUrl(topping.id);
+    final asset = toppingImageAsset(topping.id);
     return Transform.translate(
       offset: offset,
-      child: url == null
+      child: asset == null
           ? Text(
               topping.emoji,
               style: const TextStyle(fontSize: 32),
             )
-          : Image.network(
-              url,
+          : Image.asset(
+              asset,
               width: 32,
               height: 32,
             ),
