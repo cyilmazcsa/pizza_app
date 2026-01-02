@@ -13,25 +13,25 @@ class SpecialsPage extends StatelessWidget {
       _SpecialCardData(
         title: 'Champions League Nacht',
         description: 'Fan-Angebot mit Gratis-Dip.',
-        image: 'pizza_pepperoni',
+        image: 'special_champions',
         tag: 'champions_league',
       ),
       _SpecialCardData(
         title: 'Super Bowl Party',
         description: 'Family-Bundles mit Getränken.',
-        image: 'pizza_4cheese',
+        image: 'special_superbowl',
         tag: 'super_bowl',
       ),
       _SpecialCardData(
         title: 'El Clásico Abend',
         description: 'Zwei große Pizzen + Salat.',
-        image: 'pizza_funghi',
+        image: 'special_el_clasico',
         tag: 'el_clasico',
       ),
       _SpecialCardData(
         title: 'Family Friday',
         description: '4er Paket für Großfamilien.',
-        image: 'salad_greek',
+        image: 'special_family',
         tag: 'family_friday',
       ),
     ];
@@ -78,11 +78,17 @@ class _SpecialCard extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-            child: menuImageWidget(
-              data.image,
-              height: 180,
-              width: double.infinity,
-              fit: BoxFit.cover,
+            child: Container(
+              color: Theme.of(context).colorScheme.surfaceVariant,
+              padding: const EdgeInsets.all(16),
+              child: AspectRatio(
+                aspectRatio: 16 / 9,
+                child: menuImageWidget(
+                  data.image,
+                  width: double.infinity,
+                  fit: BoxFit.contain,
+                ),
+              ),
             ),
           ),
           Padding(

@@ -5,11 +5,15 @@ final List<Topping> kDemoToppings = [
   Topping(id: 'mushrooms', name: 'Pilze', emoji: '🍄'),
   Topping(id: 'peppers', name: 'Paprika', emoji: '🫑'),
   Topping(id: 'ham', name: 'Schinken', emoji: '🥓', isMeat: true),
+  Topping(id: 'salami', name: 'Salami', emoji: '🍖', isMeat: true),
   Topping(id: 'sucuk', name: 'Sucuk', emoji: '🌶️', isMeat: true),
+  Topping(id: 'seafood', name: 'Meeresfrüchte', emoji: '🦐', isMeat: true),
   Topping(id: 'corn', name: 'Mais', emoji: '🌽'),
   Topping(id: 'onion', name: 'Zwiebeln', emoji: '🧅'),
   Topping(id: 'jalapeno', name: 'Jalapeño', emoji: '🌶️'),
   Topping(id: 'pineapple', name: 'Ananas', emoji: '🍍'),
+  Topping(id: 'tomato', name: 'Tomaten', emoji: '🍅'),
+  Topping(id: 'basil', name: 'Basilikum', emoji: '🌿'),
 ];
 
 final List<MenuItem> kMenuItems = [

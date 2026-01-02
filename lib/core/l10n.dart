@@ -19,7 +19,7 @@ class AppLocalizations {
     'de': {
       'appTitle': 'Customizza',
       'navHome': 'Home',
-      'navDesigner': 'Design',
+      'navDesigner': 'Konfigurator',
       'navSpecials': 'Specials',
       'navCart': 'Bag',
       'searchHint': 'Nach Pizza suchen...',
