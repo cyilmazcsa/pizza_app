@@ -9,9 +9,7 @@ ThemeData _buildTheme(Brightness brightness) {
     brightness: brightness,
   );
 
-  final textTheme = Typography.material2021(platform: TargetPlatform.android)
-      .black
-      .apply(fontFamily: 'Roboto');
+  final textTheme = Typography.material2021(platform: TargetPlatform.iOS).black;
 
   final base = ThemeData(
     useMaterial3: true,
@@ -21,6 +19,15 @@ ThemeData _buildTheme(Brightness brightness) {
   );
 
   return base.copyWith(
+    scaffoldBackgroundColor: brightness == Brightness.light
+        ? const Color(0xFFF5F5F7)
+        : colorScheme.surface,
+    appBarTheme: AppBarTheme(
+      elevation: 0,
+      centerTitle: true,
+      backgroundColor: Colors.transparent,
+      foregroundColor: colorScheme.onSurface,
+    ),
     navigationBarTheme: NavigationBarThemeData(
       elevation: 0,
       backgroundColor: colorScheme.surface,

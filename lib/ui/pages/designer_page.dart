@@ -51,12 +51,29 @@ class _DesignerPageState extends State<DesignerPage>
     }
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Dein Meisterwerk')),
+      appBar: AppBar(title: const Text('Konfigurator')),
       body: Padding(
         padding: const EdgeInsets.all(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Teig & Rand',
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleMedium
+                      ?.copyWith(fontWeight: FontWeight.bold),
+                ),
+                TextButton.icon(
+                  onPressed: () => _showDoughInfo(context),
+                  icon: const Icon(Icons.info_outline),
+                  label: const Text('Unterschiede'),
+                ),
+              ],
+            ),
             Text(
               'Wähle deine Größe',
               style: Theme.of(context)
@@ -178,6 +195,51 @@ class _DesignerPageState extends State<DesignerPage>
       ),
     );
   }
+
+  void _showDoughInfo(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      showDragHandle: true,
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Italienisch vs. Amerikanisch',
+                style: Theme.of(context)
+                    .textTheme
+                    .titleLarge
+                    ?.copyWith(fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 12),
+              const Text(
+                'Italienisch: dünner, knuspriger Boden mit leichtem Rand – perfekt für klassische, leichte Pizzen.',
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                'Amerikanisch: dickerer, luftiger Boden mit mehr Biss – ideal für üppige Toppings.',
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'Cheese Crust',
+                style: Theme.of(context)
+                    .textTheme
+                    .titleMedium
+                    ?.copyWith(fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                'Cheese Crust füllt den Rand mit geschmolzenem Käse für extra saftigen Crunch.',
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
 }
 
 class _SizeChip extends StatelessWidget {
@@ -214,6 +276,7 @@ class _PizzaCanvas extends StatelessWidget {
     final selectedToppings = toppings
         .where((element) => config.toppingIds.contains(element.id))
         .toList();
+    final decorationColor = Colors.orange.shade200;
     return SizedBox(
       width: size,
       height: size,
@@ -228,7 +291,7 @@ class _PizzaCanvas extends StatelessWidget {
               gradient: RadialGradient(
                 colors: [
                   Colors.orange.shade100,
-                  Colors.orange.shade200,
+                  decorationColor,
                   Colors.deepOrange.shade200,
                 ],
               ),
@@ -246,16 +309,30 @@ class _PizzaCanvas extends StatelessWidget {
                 ),
               ),
             ),
-          for (var i = 0; i < selectedToppings.length; i++)
-            _ToppingMarker(
-              topping: selectedToppings[i],
-              index: i,
-              total: selectedToppings.length,
-              radius: size * 0.35,
-            ),
+          ..._buildToppingLayers(selectedToppings, size * 0.35),
         ],
       ),
     );
+  }
+
+  List<Widget> _buildToppingLayers(List<Topping> selected, double radius) {
+    final widgets = <Widget>[];
+    for (var i = 0; i < selected.length; i++) {
+      final topping = selected[i];
+      if (topping.id == 'olives') {
+        widgets.add(_OliveCluster(radius: radius, seed: i * 31));
+      } else {
+        widgets.add(
+          _ToppingMarker(
+            topping: topping,
+            index: i,
+            total: selected.length,
+            radius: radius,
+          ),
+        );
+      }
+    }
+    return widgets;
   }
 }
 
@@ -289,6 +366,51 @@ class _ToppingMarker extends StatelessWidget {
               width: 32,
               height: 32,
             ),
+    );
+  }
+}
+
+class _OliveCluster extends StatelessWidget {
+  const _OliveCluster({required this.radius, required this.seed});
+
+  final double radius;
+  final int seed;
+
+  @override
+  Widget build(BuildContext context) {
+    final random = Random(seed);
+    final widgets = <Widget>[];
+    for (var i = 0; i < 10; i++) {
+      final angle = random.nextDouble() * 2 * pi;
+      final distance = random.nextDouble() * radius;
+      final offset = Offset(distance * cos(angle), distance * sin(angle));
+      widgets.add(
+        Transform.translate(
+          offset: offset,
+          child: Container(
+            width: 16,
+            height: 16,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: const Color(0xFF415D3A),
+              border: Border.all(
+                color: const Color(0xFF2F452A),
+                width: 2,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.2),
+                  blurRadius: 2,
+                  offset: const Offset(0, 1),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+    return SizedBox.expand(
+      child: Stack(children: widgets),
     );
   }
 }

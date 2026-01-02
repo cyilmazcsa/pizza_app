@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../core/image_registry.dart';
 import '../../core/l10n.dart';
+import '../../domain/models.dart';
 import '../../state/app_state.dart';
 import '../widgets/popular_card.dart';
 import '../widgets/section_header.dart';
@@ -20,6 +21,7 @@ class HomePage extends StatelessWidget {
     final strings = AppLocalizations.of(context);
     final state = context.watch<AppState>();
     final popular = state.menu.where((item) => item.isPizza).toList();
+    final recentOrders = state.menu.where((item) => item.isPizza).take(3).toList();
 
     return Scaffold(
       appBar: AppBar(
@@ -39,6 +41,19 @@ class HomePage extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         children: [
+          Text(
+            'Guten Appetit 👋',
+            style: Theme.of(context)
+                .textTheme
+                .headlineSmall
+                ?.copyWith(fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Starte deinen Abend mit deinen Favoriten.',
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+          const SizedBox(height: 20),
           TextField(
             decoration: InputDecoration(
               hintText: strings.t('searchHint'),
@@ -46,6 +61,16 @@ class HomePage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 24),
+          if (recentOrders.isNotEmpty) ...[
+            SectionHeader(title: 'Meine letzten Bestellungen', onTap: () {}),
+            const SizedBox(height: 12),
+            Column(
+              children: recentOrders
+                  .map((item) => _RecentOrderCard(item: item))
+                  .toList(),
+            ),
+            const SizedBox(height: 24),
+          ],
           SectionHeader(title: strings.t('popularPizzas'), onTap: () {}),
           const SizedBox(height: 16),
           SizedBox(
@@ -64,6 +89,36 @@ class HomePage extends StatelessWidget {
           const SizedBox(height: 12),
           _NearbyHeroCard(),
         ],
+      ),
+    );
+  }
+}
+
+class _RecentOrderCard extends StatelessWidget {
+  const _RecentOrderCard({required this.item});
+
+  final MenuItem item;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: const EdgeInsets.only(bottom: 16),
+      child: ListTile(
+        leading: ClipRRect(
+          borderRadius: BorderRadius.circular(16),
+          child: menuImageWidget(
+            item.image,
+            width: 56,
+            height: 56,
+            fit: BoxFit.cover,
+          ),
+        ),
+        title: Text(item.title),
+        subtitle: Text(item.description),
+        trailing: FilledButton.tonal(
+          onPressed: () => context.read<AppState>().addMenuItem(item),
+          child: const Text('Nochmal'),
+        ),
       ),
     );
   }

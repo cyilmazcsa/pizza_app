@@ -9,6 +9,14 @@ const Map<String, String> _menuImageUrls = {
       'https://upload.wikimedia.org/wikipedia/commons/3/33/Pizza_quattro_formaggi.jpg',
   'pizza_pepperoni':
       'https://upload.wikimedia.org/wikipedia/commons/d/d3/Supreme_pizza.jpg',
+  'special_champions':
+      'https://upload.wikimedia.org/wikipedia/en/thumb/b/bf/UEFA_Champions_League_logo_2.svg/512px-UEFA_Champions_League_logo_2.svg.png',
+  'special_superbowl':
+      'https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/Super_Bowl_logo.svg/512px-Super_Bowl_logo.svg.png',
+  'special_el_clasico':
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Football_%28soccer_ball%29.svg/512px-Football_%28soccer_ball%29.svg.png',
+  'special_family':
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Pizza-3007395.svg/512px-Pizza-3007395.svg.png',
   'salad_greek':
       'https://upload.wikimedia.org/wikipedia/commons/9/9e/Greek_salad.jpg',
   'drink_cola':
