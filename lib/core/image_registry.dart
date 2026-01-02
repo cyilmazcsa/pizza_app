@@ -1,43 +1,31 @@
 import 'package:flutter/widgets.dart';
 
-const Map<String, String> _menuImageUrls = {
-  'pizza_marg':
-      'https://upload.wikimedia.org/wikipedia/commons/4/4b/Margherita_Originale.jpg',
-  'pizza_funghi':
-      'https://upload.wikimedia.org/wikipedia/commons/1/1d/Pizza_funghi.jpg',
-  'pizza_4cheese':
-      'https://upload.wikimedia.org/wikipedia/commons/3/33/Pizza_quattro_formaggi.jpg',
-  'pizza_pepperoni':
-      'https://upload.wikimedia.org/wikipedia/commons/d/d3/Supreme_pizza.jpg',
-  'special_champions':
-      'https://upload.wikimedia.org/wikipedia/en/thumb/b/bf/UEFA_Champions_League_logo_2.svg/512px-UEFA_Champions_League_logo_2.svg.png',
-  'special_superbowl':
-      'https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/Super_Bowl_logo.svg/512px-Super_Bowl_logo.svg.png',
-  'special_el_clasico':
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Football_%28soccer_ball%29.svg/512px-Football_%28soccer_ball%29.svg.png',
-  'special_family':
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Pizza-3007395.svg/512px-Pizza-3007395.svg.png',
-  'salad_greek':
-      'https://upload.wikimedia.org/wikipedia/commons/9/9e/Greek_salad.jpg',
-  'drink_cola':
-      'https://upload.wikimedia.org/wikipedia/commons/5/5a/Coca-Cola_glass.jpg',
-  'drink_fanta':
-      'https://upload.wikimedia.org/wikipedia/commons/8/86/Fanta_Orange_%282019%29.jpg',
+const Map<String, String> _menuImageAssets = {
+  'pizza_marg': 'assets/images/pizza_marg.jpg',
+  'pizza_funghi': 'assets/images/pizza_funghi.jpg',
+  'pizza_4cheese': 'assets/images/pizza_4cheese.jpg',
+  'pizza_pepperoni': 'assets/images/pizza_pepperoni.jpg',
+  'special_champions': 'assets/images/special_champions.png',
+  'special_superbowl': 'assets/images/special_superbowl.png',
+  'special_el_clasico': 'assets/images/special_el_clasico.png',
+  'special_family': 'assets/images/special_family.png',
+  'salad_greek': 'assets/images/salad_greek.jpg',
+  'drink_cola': 'assets/images/drink_cola.jpg',
+  'drink_fanta': 'assets/images/drink_fanta.jpg',
 };
 
-const Map<String, String> _toppingImageUrls = {
-  'olives':
-      'https://upload.wikimedia.org/wikipedia/commons/1/1b/Green_olive_with_pit.jpg',
+const Map<String, String> _toppingImageAssets = {
+  'olives': 'assets/images/topping_olives.png',
 };
 
-String? toppingImageUrl(String id) => _toppingImageUrls[id];
+String? toppingImageAsset(String id) => _toppingImageAssets[id];
 
 ImageProvider menuImageProvider(String key) {
-  final url = _menuImageUrls[key];
-  if (url == null) {
+  final asset = _menuImageAssets[key];
+  if (asset == null) {
     throw ArgumentError('Unknown menu image key: $key');
   }
-  return NetworkImage(url);
+  return AssetImage(asset);
 }
 
 Image menuImageWidget(
