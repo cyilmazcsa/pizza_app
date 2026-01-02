@@ -53,6 +53,26 @@ class _AuthPageState extends State<AuthPage> {
       body: ListView(
         padding: const EdgeInsets.all(24),
         children: [
+          Text(
+            'Schnell anmelden',
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium
+                ?.copyWith(fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 12),
+          FilledButton.icon(
+            onPressed: () => _showAuthSnack(context, 'Apple'),
+            icon: const Icon(Icons.apple),
+            label: const Text('Mit Apple anmelden'),
+          ),
+          const SizedBox(height: 12),
+          OutlinedButton.icon(
+            onPressed: () => _showAuthSnack(context, 'Gmail'),
+            icon: const Icon(Icons.mail_outline),
+            label: const Text('Mit Gmail anmelden'),
+          ),
+          const SizedBox(height: 24),
           Form(
             key: _formKey,
             child: Column(
@@ -152,5 +172,11 @@ class _AuthPageState extends State<AuthPage> {
       case ConsentType.analytics:
         return 'Analytics Zustimmung';
     }
+  }
+
+  void _showAuthSnack(BuildContext context, String provider) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('$provider Login ist in der Demo aktiviert.')),
+    );
   }
 }
