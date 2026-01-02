@@ -320,7 +320,7 @@ class _PizzaCanvas extends StatelessWidget {
     for (var i = 0; i < selected.length; i++) {
       final topping = selected[i];
       if (topping.id == 'olives') {
-        widgets.addAll(_OliveCluster(radius: radius, seed: i * 31));
+        widgets.add(_OliveCluster(radius: radius, seed: i * 31));
       } else {
         widgets.add(
           _ToppingMarker(
