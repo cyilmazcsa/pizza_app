@@ -73,27 +73,52 @@ class _AdminPageState extends State<AdminPage> {
             _NumberField(
               label: 'Slot-Intervall (Minuten)',
               initialValue: _slotInterval.toString(),
-              onSaved: (value) => _slotInterval = int.parse(value),
+              onSaved: (value) {
+                if (value == null) {
+                  return;
+                }
+                _slotInterval = int.parse(value);
+              },
             ),
             _NumberField(
               label: 'Vorbereitungszeit (Minuten)',
               initialValue: _leadTime.toString(),
-              onSaved: (value) => _leadTime = int.parse(value),
+              onSaved: (value) {
+                if (value == null) {
+                  return;
+                }
+                _leadTime = int.parse(value);
+              },
             ),
             _NumberField(
               label: 'Öffnungsstunde',
               initialValue: _openHour.toString(),
-              onSaved: (value) => _openHour = int.parse(value),
+              onSaved: (value) {
+                if (value == null) {
+                  return;
+                }
+                _openHour = int.parse(value);
+              },
             ),
             _NumberField(
               label: 'Schließstunde',
               initialValue: _closeHour.toString(),
-              onSaved: (value) => _closeHour = int.parse(value),
+              onSaved: (value) {
+                if (value == null) {
+                  return;
+                }
+                _closeHour = int.parse(value);
+              },
             ),
             _NumberField(
               label: 'Abhol-Rabatt (%)',
               initialValue: _pickupDiscount.toStringAsFixed(0),
-              onSaved: (value) => _pickupDiscount = double.parse(value),
+              onSaved: (value) {
+                if (value == null) {
+                  return;
+                }
+                _pickupDiscount = double.parse(value);
+              },
             ),
             const SizedBox(height: 16),
             DropdownButtonFormField<String?>(
@@ -225,7 +250,7 @@ class _NumberField extends StatelessWidget {
 
   final String label;
   final String initialValue;
-  final ValueChanged<String> onSaved;
+  final FormFieldSetter<String>? onSaved;
 
   @override
   Widget build(BuildContext context) {
