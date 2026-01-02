@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../core/image_registry.dart';
 import '../../core/utils.dart';
 import '../../domain/models.dart';
 import '../../state/app_state.dart';
@@ -246,8 +247,8 @@ class _PizzaCanvas extends StatelessWidget {
               ),
             ),
           for (var i = 0; i < selectedToppings.length; i++)
-            _ToppingEmoji(
-              emoji: selectedToppings[i].emoji,
+            _ToppingMarker(
+              topping: selectedToppings[i],
               index: i,
               total: selectedToppings.length,
               radius: size * 0.35,
@@ -258,15 +259,15 @@ class _PizzaCanvas extends StatelessWidget {
   }
 }
 
-class _ToppingEmoji extends StatelessWidget {
-  const _ToppingEmoji({
-    required this.emoji,
+class _ToppingMarker extends StatelessWidget {
+  const _ToppingMarker({
+    required this.topping,
     required this.index,
     required this.total,
     required this.radius,
   });
 
-  final String emoji;
+  final Topping topping;
   final int index;
   final int total;
   final double radius;
@@ -275,12 +276,19 @@ class _ToppingEmoji extends StatelessWidget {
   Widget build(BuildContext context) {
     final angle = (2 * pi * index) / (total == 0 ? 1 : total);
     final offset = Offset(radius * cos(angle), radius * sin(angle));
+    final url = toppingImageUrl(topping.id);
     return Transform.translate(
       offset: offset,
-      child: Text(
-        emoji,
-        style: const TextStyle(fontSize: 32),
-      ),
+      child: url == null
+          ? Text(
+              topping.emoji,
+              style: const TextStyle(fontSize: 32),
+            )
+          : Image.network(
+              url,
+              width: 32,
+              height: 32,
+            ),
     );
   }
 }
